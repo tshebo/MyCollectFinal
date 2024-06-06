@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "284302644095",
+    "project_id": "mycollect-91bad",
+    "storage_bucket": "mycollect-91bad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:284302644095:android:e63d6598b88a6cacf7404a",
+        "android_client_info": {
+          "package_name": "com.example.mycollectfinal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWDg4si7-zC85HOvnagKutt1vxDzjGgj8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
