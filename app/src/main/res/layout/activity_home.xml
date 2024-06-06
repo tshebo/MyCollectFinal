@@ -7,7 +7,11 @@
     android:orientation="vertical"
     android:id="@+id/main"
     tools:context=".Home">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    >
     <TextView
         android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
@@ -16,11 +20,29 @@
         android:textSize="24sp"
         android:padding="16dp" />
 
+    <ImageButton
+        android:id="@+id/menuBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_menu"
+        android:padding="20dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:tooltipText="menu" />
+</RelativeLayout>
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:queryHint="Search collections"
+        android:padding="16dp" />
+
+    <TextView
+        android:id= "@id/categoryTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Categories"
+        android:textSize="20dp"
         android:padding="16dp" />
 
     <HorizontalScrollView
@@ -32,27 +54,56 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <!-- Add categories here -->
-
-        </LinearLayout>
+            android:orientation="horizontal"/>
     </HorizontalScrollView>
-
-    <RecyclerView
-        android:id="@+id/collectionsDisplay"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="16dp" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addCollection"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_add"
-        />
+        android:padding="15dp">
 
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="16dp"
+            android:src="@drawable/collections"
+            android:tooltipText="Collections" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="28dp"
+            android:layout_marginRight="163dp"
+            android:layout_toEndOf="@+id/imageButton"
+            android:padding="16dp"
+            android:text="Collections"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="364dp">
+
+<!--Display Collections-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/collectionList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="16dp"
+            android:layout_marginStart="10dp"
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addCollection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_add"
+            android:tooltipText="Add Collection" />
+    </LinearLayout>
 </LinearLayout>

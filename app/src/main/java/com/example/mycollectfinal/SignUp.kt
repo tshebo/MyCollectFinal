@@ -84,15 +84,17 @@ class SignUp : AppCompatActivity() {
                     // Account creation is successful
                     val user = FirebaseAuth.getInstance().currentUser
                     user?.let {
-                        // Create a new user document in Firestore
+                        // Cloud Firestore
                         val db = FirebaseFirestore.getInstance()
 
-                        // Cloud Firestore
-                        val userDocument = db.collection("users").document(it.uid)
+                        // Use the user's email as the document ID
+                        val userDocument = db.collection("users").document(email)
                         val userData = hashMapOf(
                             "email" to email,
                             "fullName" to fullName
                         )
+
+                        // Set data to Firestore with the specified document ID
                         userDocument.set(userData)
                             .addOnSuccessListener {
                                 // Document creation successful
@@ -123,4 +125,5 @@ class SignUp : AppCompatActivity() {
                 }
             }
     }
+
 }
