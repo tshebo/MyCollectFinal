@@ -23,6 +23,11 @@ class ViewCollections : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null)
                 .setAnchorView(R.id.fab).show()
+
+            //initialize views
+
         }
+
+
     }
 }

@@ -10,6 +10,14 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_sign_up">SignUp</string>
+
+    <string-array name="condition_options">
+        <item>Excellent</item>
+        <item>Good</item>
+        <item>Fine</item>
+        <item>Bad</item>
+    </string-array>
+
     <string name="large_text">
         "Material is the metaphor.\n\n"
 

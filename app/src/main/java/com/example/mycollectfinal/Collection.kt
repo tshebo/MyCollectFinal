@@ -5,11 +5,12 @@ import android.net.Uri
 import com.google.firebase.Timestamp
 
 data class Item(
-    val name: String,
-    val description: String,
-    val dateOfAcquisition: String,
-    val quantity: Int,
-    val imageUri: String?
+    val name: String = "",
+    val description: String = "",
+    val condition: String = "",
+    val date: Timestamp = Timestamp.now(),
+    val quantity: Int = 0,
+    val imageUri: String? = null
 )
 
 data class Collection(
@@ -20,7 +21,7 @@ data class Collection(
     val goalAmount: Int = 0,
     val timestamp: Timestamp = Timestamp.now()
 ) {
-    // No-argument constructor for Firestore
+
     constructor() : this("", "", "", null, 0, Timestamp.now())
 }
 

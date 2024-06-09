@@ -1,5 +1,6 @@
 package com.example.mycollectfinal
 
+import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -11,34 +12,44 @@ import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 
-class CollectionAdapter(options: FirestoreRecyclerOptions<Collection>) :
+class CollectionAdapter(options: FirestoreRecyclerOptions<Collection>, private val onItemClicked: (Collection) -> Unit) :
     FirestoreRecyclerAdapter<Collection, CollectionAdapter.CollectionViewHolder>(options) {
 
-    class CollectionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val collectionImage: ImageView = itemView.findViewById(R.id.collectionImage)
-        val collectionName: TextView = itemView.findViewById(R.id.collectionName)
-        val progressBar: ProgressBar = itemView.findViewById(R.id.progressBar)
-        val progressText: TextView = itemView.findViewById(R.id.progressText)
+    class CollectionViewHolder(itemView: View, onItemClicked: (Collection) -> Unit) : RecyclerView.ViewHolder(itemView) {
+        val collectionImage = itemView.findViewById<ImageView>(R.id.collectionImage)
+        val collectionName = itemView.findViewById<TextView>(R.id.collectionName)
+        val progressBar  = itemView.findViewById<ProgressBar>(R.id.progressBar)
+        val progressText = itemView.findViewById<TextView>(R.id.progressText)
+
+        fun bind(collection: Collection, onItemClicked: (Collection) -> Unit) {
+            itemView.setOnClickListener {
+                onItemClicked(collection)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CollectionViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.collection_item, parent, false)
-        return CollectionViewHolder(itemView)
+        return CollectionViewHolder(itemView, onItemClicked)
     }
 
     override fun onBindViewHolder(holder: CollectionViewHolder, position: Int, model: Collection) {
-        holder.collectionImage.setImageURI(Uri.parse(model.imageUri))
+        // Load image into ImageView using a different method
+        holder.collectionImage.setImageResource(R.drawable.splash)
+
+        // Set other views
         holder.collectionName.text = model.name
-        // Fetch item count for this collection and update progress
         fetchItemCount(model.name) { itemCount ->
             val progress = calculateProgress(itemCount, model.goalAmount)
             holder.progressBar.progress = progress
             holder.progressText.text = "$itemCount / ${model.goalAmount}"
         }
+
+        // Handle item click
+        holder.bind(model, onItemClicked)
     }
 
     private fun calculateProgress(itemCount: Int, goalAmount: Int): Int {
@@ -46,16 +57,20 @@ class CollectionAdapter(options: FirestoreRecyclerOptions<Collection>) :
     }
 
     private fun fetchItemCount(collectionName: String, callback: (Int) -> Unit) {
-        // Replace this with actual Firestore query to fetch item count for the collection
-        val db = FirebaseFirestore.getInstance()
-        val userDocument = db.collection("users").document(FirebaseAuth.getInstance().currentUser!!.email!!)
-        userDocument.collection("collections").document(collectionName).collection("items").get()
-            .addOnSuccessListener { documents ->
-                callback(documents.size())
-            }
-            .addOnFailureListener { e ->
-                // Handle the error
-                callback(0)
-            }
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser != null) {
+            val db = FirebaseFirestore.getInstance()
+            val userDocument = db.collection("users").document(currentUser.email!!)
+            userDocument.collection("collections").document(collectionName).collection("items").get()
+                .addOnSuccessListener { documents ->
+                    callback(documents.size())
+                }
+                .addOnFailureListener { e ->
+                    // Handle the error
+                    callback(0)
+                }
+        } else {
+            callback(0)
+        }
     }
 }

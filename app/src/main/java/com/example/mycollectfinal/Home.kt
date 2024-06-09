@@ -48,7 +48,11 @@ class Home : AppCompatActivity() {
                     }
                 }
                 .addOnFailureListener { e ->
-                    Toast.makeText(this, "Error fetching user data: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        "Error fetching user data: ${e.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
         } ?: run {
             welcomeText.text = "Welcome, Guest"
@@ -67,22 +71,27 @@ class Home : AppCompatActivity() {
     }
 
     private fun showMenu() {
-
+        // Implement menu functionality
     }
 
     private fun setupRecyclerView() {
         val currentUser = auth.currentUser
 
         currentUser?.let {
-
             val userDocument = db.collection("users").document(it.email.toString())
             val query: Query = userDocument.collection("collections")
 
-            val options: FirestoreRecyclerOptions<Collection> = FirestoreRecyclerOptions.Builder<Collection>()
-                .setQuery(query, Collection::class.java)
-                .build()
+            val options: FirestoreRecyclerOptions<Collection> =
+                FirestoreRecyclerOptions.Builder<Collection>()
+                    .setQuery(query, Collection::class.java)
+                    .build()
 
-            collectionAdapter = CollectionAdapter(options)
+            collectionAdapter = CollectionAdapter(options) { collection ->
+                // Navigate to ViewSelectedCollection with the selected collection details
+                val intent = Intent(this, ViewSelectedCollection::class.java)
+                intent.putExtra("collectionName", collection.name)
+                startActivity(intent)
+            }
             recyclerView.layoutManager = LinearLayoutManager(this)
             recyclerView.adapter = collectionAdapter
         }

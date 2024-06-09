@@ -28,27 +28,26 @@
             android:paddingLeft="16dp">
 
             <TextView
-                android:id="@+id/collectionName"
+                android:id="@+id/itemName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Collection Name"
+                android:text="Item Name"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyleHorizontal"
+            <TextView
+                android:id="@+id/condition"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:progress="50"
-                android:max="100" />
+                android:gravity="start"
+                android:text="Condition: " />
 
             <TextView
-                android:id="@+id/progressText"
+                android:id="@+id/quantity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Amount/Goal" />
+                android:gravity="start"
+                android:text="qty: " />
 
         </LinearLayout>
     </RelativeLayout>

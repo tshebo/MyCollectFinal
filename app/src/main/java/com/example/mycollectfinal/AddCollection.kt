@@ -106,14 +106,13 @@ class AddCollection : AppCompatActivity() {
             val collectionRef = db.collection("users").document(userEmail)
                 .collection("collections").document(name)
 
-            // Set data to Firestore with the specified document ID
+
             collectionRef.set(collection)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Collection created successfully", Toast.LENGTH_SHORT)
                         .show()
 
-                    //navigate to adding items in this collection
-                    finish();
+                    startActivity(Intent(this, Home::class.java))
                 }
                 .addOnFailureListener {
                     Toast.makeText(
@@ -125,7 +124,9 @@ class AddCollection : AppCompatActivity() {
         } else {
             // If user is not logged in, display an error message or redirect to login screen
             Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show()
-            // You may want to redirect the user to the login screen here
+
+            startActivity(Intent(this, LogIn::class.java))
+
         }
     }
 
