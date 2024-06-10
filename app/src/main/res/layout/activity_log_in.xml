@@ -31,6 +31,8 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <!-- TextView for Email -->
+
+        <!-- EditText for Email -->
         <TextView
             android:id="@+id/textView12"
             android:layout_width="115dp"
@@ -39,10 +41,10 @@
             android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@+id/emailView1"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.114"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
-        <!-- EditText for Email -->
         <EditText
             android:id="@+id/emailView1"
             android:layout_width="344dp"

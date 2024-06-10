@@ -3,6 +3,7 @@ package com.example.mycollectfinal
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -26,9 +27,10 @@ class Home : AppCompatActivity() {
 
         // Initialize views
         recyclerView = findViewById(R.id.collectionList)
-        val menuBtn: ImageButton = findViewById(R.id.menuBtn)
+//        val menuBtn: ImageButton = findViewById(R.id.menuBtn)
         val addCollection: FloatingActionButton = findViewById(R.id.addCollection)
         val welcomeText: TextView = findViewById(R.id.welcomeText)
+        val categoryContainer = findViewById<LinearLayout>(R.id.categoryContainer)
 
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
@@ -64,7 +66,7 @@ class Home : AppCompatActivity() {
         }
 
         // Navigate to menu
-        menuBtn.setOnClickListener { showMenu() }
+//        menuBtn.setOnClickListener { showMenu() }
 
         // Set up RecyclerView
         setupRecyclerView()

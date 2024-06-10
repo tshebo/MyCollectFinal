@@ -52,6 +52,7 @@
         android:padding="16dp">
 
         <LinearLayout
+            android:id="@+id/categoryContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"/>
@@ -87,7 +88,6 @@
         android:layout_width="match_parent"
         android:layout_height="364dp">
 
-<!--Display Collections-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/collectionList"
             android:layout_width="match_parent"
