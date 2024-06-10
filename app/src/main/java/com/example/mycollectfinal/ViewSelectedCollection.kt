@@ -17,6 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
+
 class ViewSelectedCollection : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var collectionItemAdapter: CollectionItemAdapter
@@ -63,7 +64,10 @@ class ViewSelectedCollection : AppCompatActivity() {
 
         // Initialize CollectionItemAdapter
         collectionItemAdapter = CollectionItemAdapter(options) { item ->
-            // Handle item click here (e.g., launch a new activity to modify/delete the item)
+            val intent = Intent(this, EditItem::class.java)
+            intent.putExtra("collectionName", collectionName)
+           intent.putExtra("itemId", item.itemId)
+            startActivity(intent)
         }
 
         // Set CollectionItemAdapter to RecyclerView
@@ -78,7 +82,9 @@ class ViewSelectedCollection : AppCompatActivity() {
         addItem.setOnClickListener {
             val intent = Intent(this, AddItem::class.java)
             intent.putExtra("collectionName", collectionName)
+//            intent.putExtra("itemId", item.itemId)
             startActivity(intent)
+
         }
     }
 

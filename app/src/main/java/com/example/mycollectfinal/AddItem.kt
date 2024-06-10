@@ -74,7 +74,9 @@ class AddItem : AppCompatActivity() {
         if (currentUser != null) {
             val db = FirebaseFirestore.getInstance()
             val userDocument = db.collection("users").document(currentUser.email!!)
-            userDocument.collection("collections").document(collectionName).collection("items").add(item)
+            val itemId = db.collection("users").document().id
+            val itemWithId = item.copy(itemId = itemId)
+            userDocument.collection("collections").document(collectionName).collection("items").document(itemId).set(itemWithId)
                 .addOnSuccessListener {
                     onComplete(true)
                 }
@@ -85,4 +87,5 @@ class AddItem : AppCompatActivity() {
             onComplete(false)
         }
     }
+
 }

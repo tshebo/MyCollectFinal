@@ -58,6 +58,7 @@ dependencies {
     implementation("com.firebaseui:firebase-ui-firestore:8.0.2")
     implementation(libs.firebase.storage.ktx)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.firebase.storage)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

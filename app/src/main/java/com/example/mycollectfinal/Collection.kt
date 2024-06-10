@@ -10,7 +10,8 @@ data class Item(
     val condition: String = "",
     val date: Timestamp = Timestamp.now(),
     val quantity: Int = 0,
-    val imageUri: String? = null
+    val imageUri: String? = null,
+    val itemId: String = ""
 )
 
 data class Collection(
@@ -24,4 +25,7 @@ data class Collection(
 
     constructor() : this("", "", "", null, 0, Timestamp.now())
 }
+
+//add the items page to view and edit item details
+//add the achievements
 

@@ -35,11 +35,10 @@ class CollectionItemAdapter(
     }
 
     override fun onBindViewHolder(holder: CollectionItemViewHolder, position: Int, model: Item) {
-        holder.itemName.text = model.name ?: "No Name"
+        holder.itemName.text = model.name.toString()
         holder.quantity.text = model.quantity.toString()
-        holder.condition.text = model.condition ?: "No Condition"
-        holder.image.setImageResource(R.drawable.splash) // Replace with actual image loading logic
-
+        holder.condition.text = model.condition.toString()
+        holder.image.setImageResource(R.drawable.splash)
         holder.bind(model, onItemClicked)
     }
 }
