@@ -66,7 +66,7 @@ class ViewSelectedCollection : AppCompatActivity() {
         collectionItemAdapter = CollectionItemAdapter(options) { item ->
             val intent = Intent(this, EditItem::class.java)
             intent.putExtra("collectionName", collectionName)
-           intent.putExtra("itemId", item.itemId)
+            intent.putExtra("itemId", item.itemId)
             startActivity(intent)
         }
 
